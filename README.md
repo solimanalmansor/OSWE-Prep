@@ -1,1 +1,1 @@
-# OSWE-Prep
+# OSWE Exam Preparation
