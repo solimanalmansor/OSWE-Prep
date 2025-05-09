@@ -11,6 +11,7 @@ def trigger_rce(target, nameOfUploadedFile):
     To exploit the vulnerability you have to:
     - Fill in the required fields with any input, attach your 'rce.php' file, complete the CAPTCHA, and submit the ticket form.
       (e.g, https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)
+    - Ignore the `File is not allowed.` error while uploading the rce.php file
     - Run this script with the necessary arguments to proceed with the next steps.
     """
 
