@@ -34,7 +34,7 @@ def main():
     importUser(args.target, args.session)
 
     # Example Usage:
-    # python3 image_uploadimportUser_insecure_deserialization.py http://localhost:8080 gnd8fkg0vadqu08nlsb603c306 
+    # python3 importUser_insecure_deserialization.py http://localhost:8080 gnd8fkg0vadqu08nlsb603c306 
 
 if __name__ == "__main__":
     main()
