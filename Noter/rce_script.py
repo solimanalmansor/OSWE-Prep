@@ -3,7 +3,7 @@ import requests
 import traceback
 
 def GenJwt():
-    UserNamesWordlist = "/home/soliman/names2.txt"  # CHANGE ME: https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Usernames/Names/names.txt
+    UserNamesWordlist = "/home/soliman/names.txt"  # CHANGE ME: https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Usernames/Names/names.txt
     for userName in open(UserNamesWordlist):
         userName = userName.strip()
         command = [
