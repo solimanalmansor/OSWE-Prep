@@ -120,3 +120,5 @@ Started: Wed Jul  9 20:13:58 2025
 Stopped: Wed Jul  9 20:14:12 2025
 soliman@Legion:~$
 ```
+### Authentication Bypass
+Login to https://sysadmin-console-01.flujab.htb:8080/view/login/normal using `sysadm`:`th3doct0r`
