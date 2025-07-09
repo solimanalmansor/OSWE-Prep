@@ -134,3 +134,23 @@ After we logged-in successfully, we navigate to [Notepad](https://sysadmin-conso
 sshd: 10.10.16.6
 ALL: 10.10.16.6
 ```
+**If we tried to SSH to the machine before Allowing our IP**
+```
+C:\Users\moham>ssh 10.10.10.124
+kex_exchange_identification: read: Connection reset
+Connection reset by 10.10.10.124 port 22
+
+C:\Users\moham>
+```
+**If we tried to SSH to the machine after Allowing our IP**
+```
+C:\Users\moham>ssh 10.10.10.124
+The authenticity of host '10.10.10.124 (10.10.10.124)' can't be established.
+ED25519 key fingerprint is SHA256:DI5pLQ22nYlC140XgwyLNkRXIisiKpcqqXJ0cUncHjI.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.10.124' (ED25519) to the list of known hosts.
+moham@10.10.10.124: Permission denied (publickey).
+
+C:\Users\moham>
+```
