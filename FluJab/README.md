@@ -122,3 +122,15 @@ soliman@Legion:~$
 ```
 ### Authentication Bypass
 Login to https://sysadmin-console-01.flujab.htb:8080/view/login/normal using `sysadm`:`th3doct0r`
+
+### RCE
+After we logged-in successfully, we navigate to [Notepad](https://sysadmin-console-01.flujab.htb:8080/view/notepad) and click `Open` so we can allow our IP address to SSH to the machine by openning `/etc/hosts.allow` and add new couple of lines `sshd: <ATTACKER's IP ADDRESS>\nALL: 10.10.16.6` then click `Save`:
+```
+# grant ssh access per host
+# syntax:
+# sshd : [host ip]
+###########################
+
+sshd: 10.10.16.6
+ALL: 10.10.16.6
+```
