@@ -265,7 +265,7 @@ var body = JSON.stringify({{
 req.send(body);
 '''
     
-    with open("csrf.js", "w") as f:
+    with open("csrf.js", "w", encoding="utf-8") as f:
         f.write(js_content)
     print("[+] CSRF payload written to csrf.js")
     
