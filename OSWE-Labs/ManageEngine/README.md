@@ -1,1 +1,1 @@
-## MaanageEngine SQLI to RCE
+## ManageEngine SQLI to RCE
