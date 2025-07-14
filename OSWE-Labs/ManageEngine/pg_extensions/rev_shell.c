@@ -29,11 +29,11 @@ connect_back(PG_FUNCTION_ARGS)
 
 	/* convert C string to text pointer */
 #define GET_TEXT(cstrp) \
-   DatumGetTextP(DirectFunctionCall1(textin, CStringGetDatum(cstrp)))
+	DatumGetTextP(DirectFunctionCall1(textin, CStringGetDatum(cstrp)))
 
 	/* convert text pointer to C string */
 #define GET_STR(textp) \
-  DatumGetCString(DirectFunctionCall1(textout, PointerGetDatum(textp)))
+	DatumGetCString(DirectFunctionCall1(textout, PointerGetDatum(textp)))
 
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	s1 = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, (unsigned int)NULL, (unsigned int)NULL);
