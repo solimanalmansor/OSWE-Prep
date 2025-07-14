@@ -1,5 +1,5 @@
 ## Exploitation
-### Spawn a Samba share server on your Kali attacking machine hosting the malicious DLL file (rev_shell.dll)
+### Spawn a Samba share server on your Kali attacking machine hosting the malicious DLL file (`rev_shell.dll`)
 ```
 ┌──(kali㉿kali)-[~]
 └─$ sudo impacket-smbserver awae /home/kali/awae/
