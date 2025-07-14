@@ -1,1 +1,1 @@
-## AWAE/OSWE Callenge Labs Scripts
+## AWAE/OSWE Challenge Labs Exploitation Scripts
