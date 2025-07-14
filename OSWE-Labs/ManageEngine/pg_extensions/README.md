@@ -20,7 +20,7 @@ Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 [*] Remaining connections []
 
 ```
-### Setup you netcat listener
+### Setup your Netcat listener
 ```
 ┌──(kali㉿kali)-[~]
 └─$ nc -nlvp 4444
