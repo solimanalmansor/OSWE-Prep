@@ -1,4 +1,5 @@
 ## Exploitation
+**Note: This exploit will work only if the attacker is on the same network as the target system.**
 ### Spawn a Samba share server on your Kali attacking machine hosting the malicious DLL file (`rev_shell.dll`)
 ```
 ┌──(kali㉿kali)-[~]
