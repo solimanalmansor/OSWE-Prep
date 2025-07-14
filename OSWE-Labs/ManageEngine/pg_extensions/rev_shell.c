@@ -42,7 +42,7 @@ connect_back(PG_FUNCTION_ARGS)
 	/* FIX THIS */
 	hax.sin_port = htons(PG_GETARG_INT32(1));
 	/* FIX THIS TOO*/
-	hax.sin_addr.s_addr = inet_adder(GET_STR(PG_GETARG_TEXT_P(0)));
+	hax.sin_addr.s_addr = inet_addr(GET_STR(PG_GETARG_TEXT_P(0)));
 
 	WSAConnect(s1, (SOCKADDR*)&hax, sizeof(hax), NULL, NULL, NULL, NULL);
 
