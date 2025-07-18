@@ -1,1 +1,1 @@
-## AWAE/OSWE Challenge Labs Exploitation Scripts
+## AWAE/OSWE Challenge Labs Notes & Exploitation Scripts
