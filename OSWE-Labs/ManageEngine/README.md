@@ -20,5 +20,5 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 #### 1. Making the original script one liner
 Match and replace roles in Notepad++ :
 - `'.*` (remove the comments)
-- ` _.*?\n` with `✅ matches new line` option enabled (remove continuation lines)
+- ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
 - 
