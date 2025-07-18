@@ -35,5 +35,4 @@ Match and replace roles in Notepad++ (to make the payload oneliner):
 - match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator) **If you copied from the terminal, match on `\n\r` instead of jsut `\n`**
 - mach `::` replace with `:` **repeat this multiple times** (remove consecutive conlons and replace it by only one colon)
 3. **Final Payload**
-  We will paste out modified msfvenom payload just before `:WScript.Quit(0):`
-  as: `Echo serviceData:Next:<PAYLOAD_HERE>:WScript.Quit(0):`
+  - We will paste out modified msfvenom payload just before `:WScript.Quit(0):`, as: `Echo serviceData:Next:<PAYLOAD_HERE>:WScript.Quit(0):`
