@@ -21,4 +21,4 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 Match and replace roles in Notepad++ :
 - `'.*` (remove the comments)
 - ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
-- 
+- `    ` (remove tabs)
