@@ -47,4 +47,4 @@ Match and replace roles in Notepad++ (to make the payload oneliner):
   ```
 nc -nlvp 1337
   ```
-**Explloitation Script:** https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/ManageEngine/windows_rce.py
+**Exploitation Script:** https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/ManageEngine/windows_rce.py
