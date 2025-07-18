@@ -5,5 +5,7 @@ Finally, we developed an exploit that utilized Postgres User Defined Functions a
 ## Vulnerability Discovery
 By browsing through the ManageEngine’s Application Manager web interface, we can see that most URLs contain the `.do` extension. `.do` extension is typically used in a URL mapping scheme for **compiled Java code**.
 Java web applications use a deployment descriptor file named **`web.xml`** to determine how URLs map to servlets, which URLs require authentication, and other information.
-### Source COde Analysis
+### Source Code Analysis
 - Search for SQL queries in the source decompiled code in notepad++ using regx: `^.*?query.*?select.*?` (this expression basically says: Look for any line that begins with any number of alphanumeric characters which is followed by the string `query` which is followed by a number of any characters which is followed by the string `select` which is followed by a number of any characters.)
+- To reduce a web app’s attack surface, start with the front-end and review HTTP handlers. In Java servlets, these are easily found by their consistent naming pattern, like **`doGet`** and **`doPost`**.
+- 
