@@ -17,3 +17,7 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 - Use SQLI to write to the file system `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;COPY+(SELECT+$$offsec$$)+to+$$c:\\offsec.txt$$;--+`
 - Invistige if any VB scripts are being executed after performaing some action (Creating a Monitor in our case) via ProcMon. If we have ability to write to the file system, we can inject a backdoor into this VB script and it will be executed automatically by the application.
 ### Crafting the backdoor
+#### Making the original script one liner
+**Match and replace roles in Notepad++ :**
+- `'.*` (remove the comments)
+- ` _.*?\n` click [X] `matches new line` option (remove continuation lines)
