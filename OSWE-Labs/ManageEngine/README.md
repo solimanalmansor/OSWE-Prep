@@ -10,4 +10,5 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 - To reduce a web app’s attack surface, start with the front-end and review HTTP handlers. In Java servlets, these are easily found by their consistent naming pattern, like **`doGet`** and **`doPost`**.
 - Enable PostgreSQL logging from its configuration file `postgresql.conf`, search for the string `log_statement`, uncomment the line then set its value to `all` and **restart the service** to apply the changes. Start inspecting the logs `Get-Content C:\Program Files (x86)\ManageEngine\AppManager12\working\pgsql\data\amdb\pgsql_log\postgresql_13.log -wait -tail 1`
 - `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;` by injecting a special character (`;`) into the vulnerable parameter, we can check the logs for any syntax errors to verify if the injection was successful using the following command: `Get-Content postgresql_13.log -tail 100 | Select-String -pattern "syntax error"`
+- PGSQL supports stacked queries `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;select+pg_sleep(10);`
 - 
