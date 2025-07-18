@@ -23,4 +23,4 @@ Match and replace roles in Notepad++ :
 - ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
 - `    ` (remove tabs)
 - match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator)
-- 
+#### 2. Create reverse shell
