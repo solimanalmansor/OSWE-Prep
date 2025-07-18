@@ -22,3 +22,5 @@ Match and replace roles in Notepad++ :
 - `'.*` (remove the comments)
 - ` _.*?\n` with `✅ matches newline` option enabled (remove continuation lines)
 - `    ` (remove tabs)
+- match `\n` replace with `:` (remove newline and replace it with `:` which is the VB script command terminator)
+- 
