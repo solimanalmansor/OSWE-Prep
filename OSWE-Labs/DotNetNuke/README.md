@@ -260,4 +260,6 @@ Since we pass an `ObjectDataProvider` instance, the serializer expects that type
 
 While it’s theoretically possible to fix this by using a different `XmlSerializer` constructor that specifies the wrapped object’s type, this wouldn’t help because the vulnerable DNN function still uses the default constructor during deserialization. As a result, the error persists.
 
-In short, we cannot successfully serialize our payload using the DNN `SerializeDictionary` function, so we need to explore a different object to achieve invoking the `PullFile` method. We’ll address that next.
+In short, we cannot successfully serialize our payload using the DNN `SerializeDictionary` function, so we need to explore a different object to achieve invoking the `PullFile` method.
+
+#### ExpandedWrapper Class
