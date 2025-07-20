@@ -31,7 +31,7 @@ The `LoadProfile` function in the `DotNetNuke.Services.Personalization.Personali
 
 This function then calls `DeSerializeHashtable`, using the hardcoded string `"profile"` as a second parameter.
 
-```
+```c#
     public static Hashtable DeserializeHashTableXml(string Source)
 		{
 			return XmlUtils.DeSerializeHashtable(Source, "profile");
@@ -40,7 +40,7 @@ This function then calls `DeSerializeHashtable`, using the hardcoded string `"pr
 
 Inside `DeSerializeHashtable`, the process involves extracting the object type from the XML, creating an `XmlSerializer` based on it, and deserializing the user-controlled data. Critically, no type validation is performed during deserialization, making it a likely vector for exploitation.
 
-```
+```c#
     public static Hashtable DeSerializeHashtable(string xmlSource, string rootname)
 		{
 			Hashtable hashtable = new Hashtable();
