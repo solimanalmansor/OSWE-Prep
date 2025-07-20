@@ -267,6 +267,6 @@ To address the serialization issue, Muñoz and Mirosh proposed using the `Expand
 
 Let's see how that looks in practice: https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/DotNetNuke/ExpWrap/ExpWrapSerializer.cs
 
-beginning at line `19`, we see that instead of using the `ObjectDataProvider` directly, an instance of `ExpandedWrapper<FileSystemUtils, ObjectDataProvider>` is created. The `ProjectedProperty0` property is then used to assign a new `ObjectDataProvider` instance. The rest of the code remains largely unchanged.
+beginning at line `[18](https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/DotNetNuke/ExpWrap/ExpWrapSerializer.cs#L18)`, we see that instead of using the `ObjectDataProvider` directly, an instance of `ExpandedWrapper<FileSystemUtils, ObjectDataProvider>` is created. The `ProjectedProperty0` property is then used to assign a new `ObjectDataProvider` instance. The rest of the code remains largely unchanged.
 
 When this code is compiled and executed, it runs without errors, and the web server successfully processes the corresponding HTTP request—**confirming that the payload was correctly serialized and executed**.
