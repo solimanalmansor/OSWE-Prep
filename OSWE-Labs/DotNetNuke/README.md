@@ -105,7 +105,7 @@ After attaching, pause execution `Debug > BreakAll` and open `Debug > Windows > 
 
 From there, navigate to the `LoadProfile(int, int)` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace within `DotNetNuke.dll`.
 ## Exploitation
-### Payload Generation
+### Payload Options
 
 Since we're dealing with a deserialization vulnerability similar to the earlier examples, our current objective is to identify a suitable payload object for our exploit. This object must meet the following criteria:
 
