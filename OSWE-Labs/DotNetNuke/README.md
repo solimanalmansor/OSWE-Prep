@@ -98,3 +98,9 @@ It's important to note that once the IIS worker process starts, it does not load
 C:\Inetpub\wwwroot\dotnetnuke\bin> iisreset /noforce
 ```
 ### Debugging DotNetNuke Using dnSpy
+
+To debug DNN properly, you need to attach your debugger (e.g., dnSpy) to the `w3wp.exe` process — the IIS worker process running the DNN instance. If `w3wp.exe` isn’t visible, simply visit the DNN site in a browser to trigger IIS to start it, then click `Refresh` in the `Attach` dialog.
+
+After attaching, pause execution `Debug > BreakAll` and open `Debug > Windows > Modules` to view all loaded modules. Right-click any module and select `Open All Modules` to load them into the `Assembly Explorer`, once loaded, you can resume the proccess execution by clicking `Continue`.
+
+From there, navigate to the `LoadProfile(int, int)` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace within `DotNetNuke.dll`.
