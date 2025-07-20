@@ -138,6 +138,6 @@ The `DotNetNuke.dll` assembly contains a `FileSystemUtils` class with a `PullFil
 However, since `XmlSerializer` can only serialize public properties and fields (not methods), and `FileSystemUtils` exposes none that would invoke `PullFile`, it's not a viable payload object. As a result, an alternative approach is needed.
 
 #### ObjectDataProvider Class
-Muñoz and Mirosh revealed four .NET deserialization gadgets useful for exploitation, with the `ObjectDataProvider` class being the most versatile and used in their DNN exploit. According to official documentation, `ObjectDataProvider` wraps another object to act as a binding source—essentially an object providing data to UI elements.
+Muñoz and Mirosh revealed four .NET deserialization gadgets useful for exploitation, with the `ObjectDataProvider` class being the most versatile and used in their DNN exploit. According to official documentation, `ObjectDataProvider` wraps another object to act as a *binding source*—essentially an object providing data to UI elements.
 
 Its power lies in allowing attackers to set the `MethodName` property to invoke any method on the wrapped object, while `MethodParameters` lets them pass arguments to that method. Importantly, since `MethodName` and `MethodParameters` are properties (not methods), `ObjectDataProvider` works within the serialization constraints of `XmlSerializer`. This makes it an ideal payload candidate for triggering arbitrary method calls during deserialization.
