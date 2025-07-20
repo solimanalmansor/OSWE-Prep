@@ -71,3 +71,25 @@ Inside `DeSerializeHashtable`, the process involves extracting the object type f
 **Refrences:** https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-Json-Attacks.pdf
 
 ### Manipulation of Assembly Attributes for Debugging
+Debugging .NET web applications is often complicated by runtime optimizations that prevent setting breakpoints or inspecting local variables. This is because most assemblies are compiled in Release mode, with attributes like:
+
+```
+[assembly: Debuggable(DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)]
+```
+To improve the debugging experience, this can be changed to:
+
+```
+[assembly: Debuggable(DebuggableAttribute.DebuggingModes.Default | DebuggableAttribute.DebuggingModes.DisableOptimizations | DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
+```
+Via right clicking the module name and then choosing `Edit Assembly Attributes (C#)`
+
+This modification can be done using dnSpy. It's crucial to edit the correct assembly — in this case, `DotNetNuke.dll` located at:
+
+```
+C:\inetpub\wwwroot\dotnetnuke\bin\DotNetNuke.dll
+```
+However, IIS loads assemblies from a temporary location:
+
+```
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\dotnetnuke\
+```
