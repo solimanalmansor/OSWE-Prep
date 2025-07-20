@@ -68,4 +68,6 @@ Inside `DeSerializeHashtable`, the process involves extracting the object type f
 		}
 ```
 
+**Refrences:** https://www.blackhat.com/docs/us-17/thursday/us-17-Munoz-Friday-The-13th-Json-Attacks.pdf
+
 ### Manipulation of Assembly Attributes for Debugging
