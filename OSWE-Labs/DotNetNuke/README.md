@@ -11,3 +11,4 @@ We will focus on the `XMLSerializer` class, as it is directly related to the vul
   - `XmlNode` objects.
   - `DataSet` objects.
 - the type of the object being serialized must always be known to the `XmlSerializer` instance at runtime.
+## Vulnerability Analysis
