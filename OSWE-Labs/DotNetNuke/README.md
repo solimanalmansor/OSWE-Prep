@@ -12,4 +12,11 @@ We will focus on the `XMLSerializer` class, as it is directly related to the vul
   - `DataSet` objects.
 - the type of the object being serialized must always be known to the `XmlSerializer` instance at runtime.
 ## Vulnerability Analysis
+### Vulnerability Overview
 The vulnerability lies in the handling of the `DNNPersonalization` cookie, which is associated with user profiles. Notably, it can be exploited without requiring authentication. The entry point for the vulnerability is the `LoadProfile` function within the `DotNetNuke.dll` module.
+
+The `LoadProfile` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace is triggered when a user visits a non-existent page in a DNN web application. It checks for the `DNNPersonalization` cookie and, if present, passes its value to the `DeserializeHashTableXml` function. This function then calls `DeSerializeHashtable`, using the hardcoded string `"profile"` as a parameter.
+
+Inside `DeSerializeHashtable`, the process involves extracting the object type from the XML, creating an `XmlSerializer` based on it, and deserializing the user-controlled data. Critically, no type validation is performed during deserialization, making it a likely vector for exploitation.
+
+### Manipulation of Assembly Attributes for Debugging
