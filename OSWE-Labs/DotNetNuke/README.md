@@ -12,3 +12,4 @@ We will focus on the `XMLSerializer` class, as it is directly related to the vul
   - `DataSet` objects.
 - the type of the object being serialized must always be known to the `XmlSerializer` instance at runtime.
 ## Vulnerability Analysis
+The vulnerability lies in the handling of the `DNNPersonalization` cookie, which is associated with user profiles. Notably, it can be exploited without requiring authentication. The entry point for the vulnerability is the `LoadProfile` function within the `DotNetNuke.dll` module.
