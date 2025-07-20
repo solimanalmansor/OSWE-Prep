@@ -104,3 +104,5 @@ To debug DNN properly, you need to attach your debugger (e.g., dnSpy) to the `w3
 After attaching, pause execution `Debug > BreakAll` and open `Debug > Windows > Modules` to view all loaded modules. Right-click any module and select `Open All Modules` to load them into the `Assembly Explorer`, once loaded, you can resume the proccess execution by clicking `Continue`.
 
 From there, navigate to the `LoadProfile(int, int)` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace within `DotNetNuke.dll`.
+## Exploitation
+### Payload Generation
