@@ -265,4 +265,8 @@ In short, we cannot successfully serialize our payload using the DNN `SerializeD
 #### ExpandedWrapper Class
 To address the serialization issue, Muñoz and Mirosh proposed using the `ExpandedWrapper` class to finalize the construction of a malicious payload. This class allows us to wrap the original `ObjectDataProvider` and expose its relevant properties—such as `MethodName` and `MethodParameters`—as properties of the `ExpandedWrapper` instance. This approach works because `XmlSerializer` can only serialize public properties and fields, not methods. **By using `ExpandedWrapper`, we meet that requirement and enable successful serialization of the payload.**
 
-Let's see how that looks in practice: 
+Let's see how that looks in practice: https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/DotNetNuke/ExpWrap/ExpWrapSerializer.cs
+
+beginning at line `19`, we see that instead of using the `ObjectDataProvider` directly, an instance of `ExpandedWrapper<FileSystemUtils, ObjectDataProvider>` is created. The `ProjectedProperty0` property is then used to assign a new `ObjectDataProvider` instance. The rest of the code remains largely unchanged.
+
+When this code is compiled and executed, it runs without errors, and the web server successfully processes the corresponding HTTP request—**confirming that the payload was correctly serialized and executed**.
