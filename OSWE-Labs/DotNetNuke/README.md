@@ -93,3 +93,7 @@ However, IIS loads assemblies from a temporary location:
 ```
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\dotnetnuke\
 ```
+It's important to note that once the IIS worker process starts, it does not load assemblies directly from the DotNetNuke directory under the inetpub path. Instead, it copies the necessary modules to a temporary directory and loads them from there. To ensure IIS loads the edited module, simply restart the IIS service.
+```
+C:\Inetpub\wwwroot\dotnetnuke\bin> iisreset /noforce
+```
