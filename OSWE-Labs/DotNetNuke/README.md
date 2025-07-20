@@ -114,3 +114,25 @@ Since we're dealing with a deserialization vulnerability similar to the earlier 
 3. It must be serializable using the `XmlSerializer` class.
 4. It must conform to the XML structure expected by the vulnerable `DeSerializeHashtable` function.
 
+#### FileSystemUtils PullFile Method
+The `DotNetNuke.dll` assembly contains a `FileSystemUtils` class with a `PullFile` method, which can download files from a URL to the server — potentially useful for uploading a malicious ASPX shell. 
+
+```c#
+		public static string PullFile(string URL, string FilePath)
+		{
+			string result = "";
+			try
+			{
+				WebClient webClient = new WebClient();
+				webClient.DownloadFile(URL, FilePath);
+			}
+			catch (Exception ex)
+			{
+				FileSystemUtils.Logger.Error(ex);
+				result = ex.Message;
+			}
+			return result;
+		}
+```
+
+However, since `XmlSerializer` can only serialize public properties and fields (not methods), and `FileSystemUtils` exposes none that would invoke `PullFile`, it's not a viable payload object. As a result, an alternative approach is needed.
