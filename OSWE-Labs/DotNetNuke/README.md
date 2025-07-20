@@ -17,7 +17,7 @@ The vulnerability lies in the handling of the `DNNPersonalization` cookie, which
 
 The `LoadProfile` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace is triggered when a user visits a non-existent page in a DNN web application. It checks for the `DNNPersonalization` cookie and, if present, passes its value to the `DeserializeHashTableXml` function. 
 
-```
+```c#
 		HttpContext httpContext = HttpContext.Current;
 		if (httpContext != null && httpContext.Request.Cookies["DNNPersonalization"] != null)
 		{
