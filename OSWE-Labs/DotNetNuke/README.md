@@ -240,3 +240,24 @@ namespace ODPSerializer
 }
 
 ```
+If we compile the new proof of concept and run it under the dnSpy debugger we will be greeted with the following message:
+```
+An unhandled exception occurred in ODPSerializer.exe (9420)
+Exception: System.InvalidOperationException
+Message: There was an error generating the XML document.
+```
+If we drill down to the `_innerException` > `_message` value of the exception variable, we can see that the serializer did not expect the `FileSystemUtils` class instance
+```
+The type DotNetNuke.Common.Utilities.FileSystemUtils was not expected. Use the XmlInclude or SoapInclude attribute to specify types that are not known statically.
+```
+The issue arises because the `XmlSerializer` in the `SerializeDictionary` function is instantiated using the type returned by the object’s `GetType` method. 
+
+```
+XmlSerializer xmlSerializer = new XmlSerializer(myODP.GetType(), new Type[] {typeof(FileSystemUtils)});
+```
+
+Since we pass an `ObjectDataProvider` instance, the serializer expects that type and is unaware of the wrapped `FileSystemUtils` object inside it, causing serialization to fail.
+
+While it’s theoretically possible to fix this by using a different `XmlSerializer` constructor that specifies the wrapped object’s type, this wouldn’t help because the vulnerable DNN function still uses the default constructor during deserialization. As a result, the error persists.
+
+In short, we cannot successfully serialize our payload using the DNN `SerializeDictionary` function, so we need to explore a different object to achieve invoking the `PullFile` method. We’ll address that next.
