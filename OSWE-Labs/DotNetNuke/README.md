@@ -81,7 +81,7 @@ To improve the debugging experience, this can be changed to:
 ```
 [assembly: Debuggable(DebuggableAttribute.DebuggingModes.Default | DebuggableAttribute.DebuggingModes.DisableOptimizations | DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
 ```
-Via right clicking the module name and then choosing `Edit Assembly Attributes (C#)`
+Via right clicking the module name and then choosing `Edit Assembly Attributes (C#)` and click `Compile`
 
 This modification can be done using dnSpy. It's crucial to edit the correct assembly — in this case, `DotNetNuke.dll` located at:
 
