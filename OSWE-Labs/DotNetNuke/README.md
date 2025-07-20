@@ -106,3 +106,11 @@ After attaching, pause execution `Debug > BreakAll` and open `Debug > Windows > 
 From there, navigate to the `LoadProfile(int, int)` function in the `DotNetNuke.Services.Personalization.PersonalizationController` namespace within `DotNetNuke.dll`.
 ## Exploitation
 ### Payload Generation
+
+Since we're dealing with a deserialization vulnerability similar to the earlier examples, our current objective is to identify a suitable payload object for our exploit. This object must meet the following criteria:
+
+1. It must execute code useful for our purposes.
+2. It must exist within one of the assemblies already loaded by the DNN application.
+3. It must be serializable using the `XmlSerializer` class.
+4. It must conform to the XML structure expected by the vulnerable `DeSerializeHashtable` function.
+
