@@ -263,3 +263,5 @@ While it’s theoretically possible to fix this by using a different `XmlSeriali
 In short, we cannot successfully serialize our payload using the DNN `SerializeDictionary` function, so we need to explore a different object to achieve invoking the `PullFile` method.
 
 #### ExpandedWrapper Class
+To address the serialization issue, Muñoz and Mirosh proposed using the `ExpandedWrapper` class to finalize the construction of a malicious payload. This class allows us to wrap the original `ObjectDataProvider` and expose its relevant properties—such as `MethodName` and `MethodParameters`—as properties of the `ExpandedWrapper` instance. This approach works because `XmlSerializer` can only serialize public properties and fields, not methods. **By using `ExpandedWrapper`, we meet that requirement and enable successful serialization of the payload.**
+
