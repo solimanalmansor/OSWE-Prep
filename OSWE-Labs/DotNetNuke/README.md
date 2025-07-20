@@ -97,3 +97,4 @@ It's important to note that once the IIS worker process starts, it does not load
 ```
 C:\Inetpub\wwwroot\dotnetnuke\bin> iisreset /noforce
 ```
+### Debugging DotNetNuke Using dnSpy
