@@ -252,7 +252,7 @@ The type DotNetNuke.Common.Utilities.FileSystemUtils was not expected. Use the X
 ```
 The issue arises because the `XmlSerializer` in the `SerializeDictionary` function is instantiated using the type returned by the object’s `GetType` method. 
 
-```
+```c#
 XmlSerializer xmlSerializer = new XmlSerializer(myODP.GetType(), new Type[] {typeof(FileSystemUtils)});
 ```
 
