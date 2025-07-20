@@ -172,7 +172,7 @@ Its power lies in allowing attackers to set the `MethodName` property to invoke 
 
 #### Serialization of the ObjectDataProvider
 As mentioned earlier, our `DNNPersonalization` cookie payload must be in XML format. Since we’ve already shown how to serialize an object using the `XmlSerializer` class, we can incorporate that code into our example application. However, the cookie needs a specific structure to reach the deserialization function—it must include a `"profile"` node with an `"item"` tag containing a `"type"` attribute that describes the enclosed object. Instead of manually building this XML, we can reuse the existing DNN function that generates the cookie value: `SerializeDictionary`, found in the `DotNetNuke.Common.Utilities.XmlUtils` namespace.
-```
+```c#
 // DotNetNuke.Common.Utilities.XmlUtils
 // Token: 0x06004365 RID: 17253 RVA: 0x000F2A74 File Offset: 0x000F0C74
 public static string SerializeDictionary(IDictionary source, string rootName)
